@@ -51,10 +51,11 @@ export const App: React.FC = () => {
     });
   }, [todos, filter]);
 
-  const selectedTodo =
-    selectedTodoId >= 0
-      ? filteredTodos.find(todo => todo.id === selectedTodoId)
+  const selectedTodo = useMemo(() => {
+    return selectedTodoId >= 0
+      ? todos.find(todo => todo.id === selectedTodoId)
       : null;
+  }, [todos, selectedTodoId]);
 
   const handleStatusSelect = useCallback(
     (status: Filter['completedStatus']) => {
