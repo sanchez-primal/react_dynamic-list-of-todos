@@ -51,6 +51,11 @@ export const App: React.FC = () => {
     });
   }, [todos, filter]);
 
+  const selectedTodo =
+    selectedTodoId >= 0
+      ? filteredTodos.find(todo => todo.id === selectedTodoId)
+      : null;
+
   const handleStatusSelect = useCallback(
     (status: Filter['completedStatus']) => {
       setFilter(current => ({ ...current, completedStatus: status }));
@@ -103,11 +108,8 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      {selectedTodoId >= 0 && (
-        <TodoModal
-          todo={filteredTodos.find(todo => todo.id === selectedTodoId) as Todo}
-          onClose={removeTodoSelection}
-        />
+      {selectedTodo && (
+        <TodoModal todo={selectedTodo} onClose={removeTodoSelection} />
       )}
     </>
   );

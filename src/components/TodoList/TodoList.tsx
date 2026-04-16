@@ -38,7 +38,7 @@ export const TodoList: React.FC<Props> = ({
             key={todo.id}
             todo={todo}
             isSelected={isSelected}
-            onClick={isSelected ? onReset : onSelect}
+            onClick={isSelected ? () => onReset : onSelect}
           />
         );
       })}
